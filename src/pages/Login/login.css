@@ -2,6 +2,7 @@
   display: flex;
   justify-content: center;
   margin-top: 100px;
+  overflow: hidden;
 }
 
 .segment {
@@ -9,7 +10,20 @@
 }
 
 .login-form {
+  padding: .5rem 1rem;
   display: flex;
   flex-direction: column;
   gap: 20px;
+}
+
+@media screen and (max-width: 550px) {
+  .segment {
+    width: 300px;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .segment {
+    width: 250px;
+  }
 }

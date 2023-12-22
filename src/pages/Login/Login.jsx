@@ -1,57 +1,73 @@
 import { useFormik } from "formik";
-import React from "react";
-import { Button, Form, Segment, Icon } from "semantic-ui-react";
-import "./login.css";
-import empData from "../../assets/data/employeesData.json";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Button, Form, Icon, Segment } from "semantic-ui-react";
+import empData from "../../assets/data/employeesData.json";
+import "./login.css";
 
 const Login = () => {
 	const navigate = useNavigate();
+	const [formSubmitted, setFormSubmitted] = useState(false);
 
 	const formik = useFormik({
 		initialValues: {
 			username: "",
 			password: "",
+			showPassword: false,
 		},
-		onSubmit: (values) => {
-      
+		onSubmit: (values, onSubmitProps) => {
+			onSubmitProps.setSubmitting(false);
 		},
 		validate: (values) => {
+			// setFormSubmitted(!formSubmitted)
 			let errors = {};
-
-			if (!values.username) {
-				errors.username = "Required";
-			}
-
-			if (!values.password) {
-				errors.password = "Required";
-			}
-
-			if (values.username && values.password) {
-				let user = empData.employees.filter(
-					(emp, index) => emp.userName === values.username
-				);
-
-				if (user.length > 0) {
-					if (user[0].password === values.password) {
-						navigate("/dashboard");
-					} else {
-						errors.password = "Wrong Password";
-					}
-				} else {
-					errors.username = "User doesn't exists";
+			console.log("formSubmitted?", formSubmitted)
+			if (formSubmitted) {
+				console.log("submitted")
+				if (!values.username) {
+					errors.username = "Username is required";
 				}
-			}
 
+				if (!values.password) {
+					errors.password = "Password is required";
+				}
+
+				if (!errors.username && !errors.password) {
+					let user = empData.employees.filter(
+						(emp, index) => emp.userName === values.username
+					);
+
+					if (user.length > 0) {
+						if (user[0].password === values.password) {
+							navigate("/dashboard");
+						} else {
+							errors.password = "Wrong Password";
+						}
+					} else {
+						errors.username = "User doesn't exists";
+					}
+				}
+
+			}
 			return errors;
 		},
 	});
 
+	console.log("submit:", formSubmitted)
+
+	const submitHandler = () => {
+		setFormSubmitted(!formSubmitted);
+	}
+
+	const changeHandler = () => {
+		setFormSubmitted(false);
+		console.log("change")
+	}
 
 	return (
 		<div className="login">
 			<Segment className="segment">
-				<Form className="login-form" onSubmit={formik.handleSubmit} >
+				<Form className="login-form" onSubmit={ () => formik.handleSubmit() }  >
 					<div className="form-field">
 						<Form.Field>
 							<Form.Input
@@ -59,48 +75,48 @@ const Login = () => {
 								type="text"
 								name="username"
 								placeholder="Username"
-								value={formik.values.username}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								value={ formik.values.username }
+								onChange={ formik.handleChange }
+								onBlur={ formik.handleBlur }
+								onKeyPress = {changeHandler}
+								error={ formik.errors.username && {
+									content: formik.errors.username,
+									pointing: 'below',
+								} }
 							/>
 						</Form.Field>
 					</div>
-					{formik.errors.username && (
-						<div style={{ color: "red" }}>
-							{formik.touched.username && formik.errors.username}
-						</div>
-					)}
 					<div className="form-field">
 						<Form.Field>
 							<Form.Input
 								label="Password"
-								type={formik.values.showPassword ? "password" : "text"}
+								type={ formik.values.showPassword ? "text" : "password" }
 								name="password"
 								placeholder="Password"
-								value={formik.values.password}
-								onChange={formik.handleChange}
-								onBlur={formik.handleBlur}
+								value={ formik.values.password }
+								onChange={ formik.handleChange }
+								onBlur={ formik.handleBlur }
+								error={ formSubmitted && formik.errors.password && {
+									content: formik.errors.password,
+									pointing: 'above',
+								} }
 								icon={
 									<Icon
-										name={formik.values.showPassword ? "eye slash" : "eye"}
+										name={ formik.values.showPassword ? "eye" : "eye slash" }
 										link
-										onClick={() =>
+										onClick={ () =>
 											formik.setFieldValue(
 												"showPassword",
 												!formik.values.showPassword
 											)
 										}
 									/>
+
 								}
 							/>
 						</Form.Field>
 					</div>
-					{formik.errors.password && (
-						<div style={{ color: "red" }}>
-							{formik.touched.password && formik.errors.password}
-						</div>
-					)}
-					<Button fluid primary >
+					<Button fluid primary onClick={ () => { submitHandler(); } } >
 						Login
 					</Button>
 				</Form>
