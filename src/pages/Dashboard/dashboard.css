@@ -15,11 +15,6 @@
   padding-top: 30px;
 }
 
-.fontawesome {
-  font-size: 2.5rem;
-  margin-top: 1rem;
-}
-
 .main {
   width: 85vw;
   height: 100vh;
@@ -30,20 +25,14 @@
   margin: 2rem 0;
   padding: 1rem;
   gap: 10%;
+
 }
 
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.filter-column {
+  position: relative;
 }
 
-.card:hover {
-  cursor: pointer;
-}
-
-.card-content{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.filter-row {
+  position: absolute;
+  right: 2rem;
 }

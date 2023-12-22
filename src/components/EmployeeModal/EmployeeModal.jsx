@@ -6,7 +6,7 @@ const EmployeeModal = (props) => {
     <div>
       <Modal open={ props.open }>
           <Modal.Content image>
-            <Image size='medium' src={ require("../../assets/images/profile-icon.jpg") } wrapped />
+            <Image size='medium' src={ props.selectedEmp.src } wrapped />
             <Modal.Description>
               <Header>{ props.selectedEmp.fullName }</Header>
               { Object.entries(props.selectedEmp).map((data, value) => (
