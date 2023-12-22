@@ -31,7 +31,7 @@ const Dashboard = () => {
         </Grid.Column>
 
         <Grid.Column className='filter-column' style={ { width: "85%" } }>
-          <Grid.Row className='filter-row' >
+          <Grid.Row className='filter-row'style={{backgroundColor: "blue"}} >
               <EmployeeFilter filteredEmp={filteredEmp} setFilteredEmp={setFilteredEmp} />
           </Grid.Row>
           <EmployeeCard filteredEmp={filteredEmp} selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
