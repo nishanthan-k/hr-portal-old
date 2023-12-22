@@ -25,7 +25,7 @@ const Dashboard = () => {
         </Grid.Column>
 
         <Grid.Column style={ { width: "85%" } }>
-          
+
           <EmployeeCard selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
           <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
         </Grid.Column>
