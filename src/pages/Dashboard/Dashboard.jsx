@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Icon } from 'semantic-ui-react'
+import { Grid, GridColumn, Icon } from 'semantic-ui-react'
 import EmployeeCard from '../../components/EmployeeCard/EmployeeCard'
 import EmployeeModal from '../../components/EmployeeModal/EmployeeModal'
 import "./dashboard.css"
@@ -17,15 +17,22 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard-container'>
-      <div className='sidebar'>
-        <Icon name={ "building" } size='big'></Icon>
-      </div>
-      <div className='main'>
-        <EmployeeCard selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
-        <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
-      </div>
+      <Grid celled padded style={ { width: "100vw" } }>
+        <Grid.Column style={ { backgroundColor: "darkorchid", width: "15%" } }>
+          <div className='sidebar'>
+            <Icon name={ "building" } size='big' style={ { color: "white" } }></Icon>
+          </div>
+        </Grid.Column>
+
+        <Grid.Column style={ { width: "85%" } }>
+          
+          <EmployeeCard selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
+          <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
+        </Grid.Column>
+      </Grid>
     </div>
   )
 }
 
 export default Dashboard
+
