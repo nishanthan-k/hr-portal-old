@@ -21,32 +21,44 @@ const EmployeeFilter = (props) => {
 
 	const searchHandler = (e) => {
 		setInput(e.target.value);
-		console.log("set input:", input);
+		// console.log("set input:", input);
 	};
 
 	const filterHandler = (event, { value }) => {
-		console.log(value);
+		// console.log(value);
 		let bird_name = event.target.textContent;
-		console.log(bird_name);
+		// console.log(bird_name);
 		setFilterOption(value);
 	};
 
 	const sortHandler = (event, { value }) => {
-		console.log(value);
+		// console.log(value);
 		let bird_name = event.target.textContent;
-		console.log(bird_name);
+		// console.log(bird_name);
 		setSortOption(value);
 	};
 
 	function sortDataBy(data, byKey) {
-		let sortedData;
-		// if(byKey === "exp"){
-		console.log("sorting by exp");
-		sortedData = data.sort(function (a, b) {
-			return b.exp - a.exp;
-		});
-		// }
-		console.log("sortedData:", sortedData);
+		let sortedData = data;
+		if (byKey === "exp") {
+			// console.log("sorting by exp");
+			sortedData = data.sort(function (a, b) {
+				return b.exp - a.exp;
+			});
+		} else {
+			sortedData.forEach((emp, index) => {
+				let parts = emp.doj.split("-");
+				sortedData.dateFormat = new Date(parts[2], parts[1] - 1, parts[0]);
+			});
+			sortedData = sortedData.sort((a, b) => a.dateFormat - b.dateFormat);
+			sortedData.forEach((emp) => delete emp.dateFormat);
+		}
+
+		console.log(
+			"sortedData:",
+			sortedData,
+			"-----------------------------------------------------------------------------------"
+		);
 		return sortedData;
 	}
 
@@ -69,10 +81,10 @@ const EmployeeFilter = (props) => {
 			});
 		}
 
-		console.log("doj", sortOption);
+		// console.log("doj", sortOption);
 
 		temp.map((emp, index) => {
-			console.log(typeof emp.exp, emp.exp);
+			// console.log(typeof emp.exp, emp.exp);
 		});
 
 		// if (sortOption) {
@@ -86,10 +98,10 @@ const EmployeeFilter = (props) => {
 			// console.log("lt", input)
 			// props.setFilteredEmp("No Input");
 			props.setFilteredEmp(temp);
-			console.log(
-				typeof props.filteredEmp,
-				"--------------------------------------------------------"
-			);
+			// console.log(
+				// typeof props.filteredEmp,
+				// "--------------------------------------------------------"
+			// );
 		}
 
 		if (input.length === 0) {
@@ -115,7 +127,10 @@ const EmployeeFilter = (props) => {
 		//     button basic floating placeholder='Sort By' options={ sortBy } defaultValue="exp" onChange={sortHandler}
 		//   />
 		// </div>
-		<div className="filter-bar" style={{backgroundColor: "white", width: "450px"}}>
+		<div
+			className="filter-bar"
+			style={{ backgroundColor: "white", width: "450px" }}
+		>
 			<Input
 				action={
 					<Dropdown
