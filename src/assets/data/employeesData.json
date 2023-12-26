@@ -1,7 +1,7 @@
 {
   "employees": [
     {
-      "EmpID": "EMP101",
+      "empID": "EMP101",
       "role": "Frontend Developer",
       "firstName": "Romin",
       "lastName": "Irani",
@@ -16,7 +16,7 @@
       "exp": 1
     },
     {
-      "EmpID": "EMP102",
+      "empID": "EMP102",
       "role": "Backend Developer",
       "firstName": "Neil",
       "lastName": "Irani",
@@ -31,7 +31,7 @@
       "exp": 7
     },
     {
-      "EmpID": "EMP103",
+      "empID": "EMP103",
       "role": "Fullstack Developer",
       "firstName": "Tom",
       "lastName": "Hanks",
@@ -46,7 +46,7 @@
       "exp": 3
     },
     {
-      "EmpID": "EMP104",
+      "empID": "EMP104",
       "role": "Frontend Developer",
       "firstName": "John",
       "lastName": "Peter",
@@ -61,7 +61,7 @@
       "exp": 5
     },
     {
-      "EmpID": "EMP105",
+      "empID": "EMP105",
       "role": "Fullstack Developer",
       "firstName": "David",
       "lastName": "Thomas",
@@ -76,7 +76,7 @@
       "exp": 1
     },
     {
-      "EmpID": "EMP106",
+      "empID": "EMP106",
       "role": "Business Analyst",
       "firstName": "Dhaval",
       "lastName": "Patel",
@@ -235,7 +235,7 @@
       "password": "ethanpassword"
     },
     {
-      "empID": "E01EMP116",
+      "empID": "EMP116",
       "firstName": "Ava",
       "lastName": "Anderson",
       "fullName": "Ava Anderson",

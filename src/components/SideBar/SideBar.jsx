@@ -18,7 +18,7 @@ const SideBar = () => {
           <Icon name='dashboard' />
           Dashboard
         </Menu.Item>
-
+        
         <Menu.Item as={ Link } name="projects" to="/projects">
           <Icon name='laptop' />
           Projects

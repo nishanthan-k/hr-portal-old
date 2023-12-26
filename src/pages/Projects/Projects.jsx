@@ -1,18 +1,32 @@
-import React, { useState } from 'react'
-import { Grid, Item } from 'semantic-ui-react'
-import SideBar from '../../components/SideBar/SideBar'
-import EmployeeModal from '../../components/EmployeeModal/EmployeeModal';
-import projectData from "../../assets/data/projectDetails.json"
+import React, { useState } from 'react';
+import { Grid, Item } from 'semantic-ui-react';
+import empData from "../../assets/data/employeesData.json";
+import projectData from "../../assets/data/projectDetails.json";
+import EmployeeCard from '../../components/EmployeeCard/EmployeeCard';
+import SideBar from '../../components/SideBar/SideBar';
+import { useNavigate } from 'react-router-dom';
 
 const Projects = () => {
-
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const [showDevelopers, setShowDevelopers] = useState(false);
   const [selectedEmp, setSelectedEmp] = useState(open || "");
+
+  const fetchDevelopers = (teamMembers) => {
+    let arr = empData.employees.filter((emp, index) => teamMembers.includes(emp.empID))
+    console.log("arr:", arr);
+
+    return arr;
+  }
 
   const clickHandler = (emp) => {
     setOpen(!open);
     setSelectedEmp(emp);
-    <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
+  }
+
+  const fetchDetails = (project) => {
+    console.log("fetch details")
+    navigate("/projects/details", {state: {project: project}})
   }
 
   return (
@@ -25,19 +39,25 @@ const Projects = () => {
           <Item.Group divided >
 
             { projectData.map((project, index) => (
-              <Item key={ index }>
-                <Item.Image size='small' src={ (project.src) } />
+              <Item key={ index }  onClick={() => fetchDetails(project) }  >
+                <Item.Image size='small' src={ (project.src) } onClick={() => fetchDetails(project) } />
                 <Item.Content style={ { padding: "20px" } }>
-                  <Item.Header>{ project.title }</Item.Header>
+                  <Item.Header onClick={() => fetchDetails(project) }>{ project.title }</Item.Header>
                   <Item.Meta>
                     { project.projectTeam }
                   </Item.Meta>
                   <Item.Description>
                     { project.description }
-                    <Item.Extra>
-                      { project.techStack }
-                    </Item.Extra>
                   </Item.Description>
+                  <Item.Extra>
+                    { project.techStack }
+                  </Item.Extra>
+                  <Item.Extra>
+                    <span onClick={ () => { setShowDevelopers(!showDevelopers) } }>See Developers</span>
+                    { showDevelopers && (
+                      <EmployeeCard filteredEmp={ fetchDevelopers(project.teamMembers) } />
+                    ) }
+                  </Item.Extra>
                 </Item.Content>
               </Item>
             )) }
