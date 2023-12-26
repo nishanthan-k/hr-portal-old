@@ -9,6 +9,8 @@ const EmployeeCard = (props) => {
   const totalPages = Math.ceil(props.filteredEmp.length / cardsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
 
+
+
   const renderCards = () => {
     const startIndex = (currentPage - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;

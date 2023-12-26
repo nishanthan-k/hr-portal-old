@@ -50,13 +50,7 @@ const Projects = () => {
                     { project.description }
                   </Item.Description>
                   <Item.Extra>
-                    { project.techStack }
-                  </Item.Extra>
-                  <Item.Extra>
-                    <span onClick={ () => { setShowDevelopers(!showDevelopers) } }>See Developers</span>
-                    { showDevelopers && (
-                      <EmployeeCard filteredEmp={ fetchDevelopers(project.teamMembers) } />
-                    ) }
+                    Tech Stack : { project.techStack }
                   </Item.Extra>
                 </Item.Content>
               </Item>

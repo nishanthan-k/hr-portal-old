@@ -1,14 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { Grid, Header, Table } from 'semantic-ui-react';
 import SideBar from '../SideBar/SideBar';
 import EmployeeCard from '../EmployeeCard/EmployeeCard';
 import empData from "../../assets/data/employeesData.json"
+import EmployeeModal from '../EmployeeModal/EmployeeModal';
 
 const ProjectDetails = (props) => {
   const location = useLocation();
   const project = location.state.project || "";
   // console.log(project)
+
+  const [open, setOpen] = useState(false);
+  const [selectedEmp, setSelectedEmp] = useState(open || "");
+
+  const clickHandler = (emp) => {
+    setOpen(!open);
+    setSelectedEmp(emp);
+  }
 
   const fetchDevelopers = (teamMembers) => {
     let arr = empData.employees.filter((emp, index) => teamMembers.includes(emp.empID))
@@ -16,7 +25,6 @@ const ProjectDetails = (props) => {
 
     return arr;
   }
-
 
   return (
     <div>
@@ -46,7 +54,10 @@ const ProjectDetails = (props) => {
 
               <Table.Row>
                 <Table.HeaderCell>Team Members : </Table.HeaderCell>
-                <Table.Cell> <EmployeeCard filteredEmp={ fetchDevelopers(project.teamMembers) } /> </Table.Cell>
+                <Table.Cell>
+                  <EmployeeCard filteredEmp={ fetchDevelopers(project.teamMembers) } clickHandler={ clickHandler } />
+                  <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
+                </Table.Cell>
               </Table.Row>
 
 
