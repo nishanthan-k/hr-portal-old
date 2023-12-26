@@ -1,37 +1,55 @@
-import React from 'react'
-import { Card, Image } from 'semantic-ui-react'
-import "./employeeCard.css"
+import React, { useState } from 'react';
+import { Card, Image, Pagination } from 'semantic-ui-react';
+import './employeeCard.css';
 
 const EmployeeCard = (props) => {
-  console.log("props.filteredEmp:", props.filteredEmp, props.filteredEmp.length)
-  return (
-    <div className='employee-cards'>
-      {/* { empData.employees.map((emp, index) => (
-        <Card key={ index } className='card' onClick={ () => { props.clickHandler(emp) } } >
-          <Image src={ emp.src } ui={ false } style={ { width: "100px", height: "100px" } } />
-          <Card.Content className='card-content'>
-            <Card.Header>{ emp.fullName }</Card.Header>
-            <Card.Meta>Joined in { emp.doj }</Card.Meta>
-            <Card.Description>{ emp.role }</Card.Description>
-          </Card.Content>
-        </Card>
-      )) } */}
-      
-      { 
-        props.filteredEmp.map((emp, index) => (
-          <Card key={ index } className='card' onClick={ () => { props.clickHandler(emp) } } >
-            <Image src={ emp.src } ui={ false } style={ { width: "100px", height: "100px" } } />
-            <Card.Content className='card-content'>
-              <Card.Header>{ emp.fullName }</Card.Header>
-              <Card.Meta>Joined in { emp.doj }</Card.Meta>
-              <Card.Meta>{ emp.exp } exp</Card.Meta>
-              <Card.Description>{ emp.role }</Card.Description>
-            </Card.Content>
-          </Card>
-        ))
-       }
-    </div>
-  )
-}
+  console.log('props.filteredEmp:', props.filteredEmp, props.filteredEmp.length);
 
-export default EmployeeCard
+  const cardsPerPage = 10;
+  const totalPages = Math.ceil(props.filteredEmp.length / cardsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+
+  const renderCards = () => {
+    const startIndex = (currentPage - 1) * cardsPerPage;
+    const endIndex = startIndex + cardsPerPage;
+
+    return props.filteredEmp.slice(startIndex, endIndex).map((emp) => (
+      <Card key={ emp.fullName } onClick={ () => props.clickHandler(emp) }>
+        <Image src={ emp.src } ui={ false } style={ { width: '100px', height: '100px' } } />
+        <Card.Content className="card-content">
+          <Card.Header>{ emp.fullName }</Card.Header>
+          <Card.Meta>Joined in { emp.doj }</Card.Meta>
+          <Card.Meta>{ emp.exp } Exp</Card.Meta>
+          <Card.Description>{ emp.role }</Card.Description>
+        </Card.Content>
+      </Card>
+    ));
+  };
+
+  const handlePageChange = (e, { activePage }) => {
+    setCurrentPage(activePage);
+    console.log('Page changed to', activePage);
+  };
+
+  return (
+    <div className='employee-container'>
+      <div className='employee-cards'>
+        { renderCards() }
+      </div>
+      <div>
+        <Pagination
+          boundaryRange={ 0 }
+          defaultActivePage={ 1 }
+          ellipsisItem={ null }
+          firstItem={ null }
+          lastItem={ null }
+          siblingRange={ 1 }
+          totalPages={ totalPages }
+          onPageChange={ handlePageChange }
+        />
+      </div>
+    </div>
+  );
+};
+
+export default EmployeeCard;

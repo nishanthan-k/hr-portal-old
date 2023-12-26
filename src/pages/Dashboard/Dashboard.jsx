@@ -5,6 +5,7 @@ import EmployeeCard from '../../components/EmployeeCard/EmployeeCard'
 import EmployeeFilter from '../../components/EmployeeFilter/EmployeeFilter'
 import EmployeeModal from '../../components/EmployeeModal/EmployeeModal'
 import "./dashboard.css"
+import SideBar from '../../components/SideBar/SideBar'
 
 const Dashboard = () => {
   const [open, setOpen] = useState(false);
@@ -22,19 +23,17 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard-container'>
-      <Grid celled padded style={ { width: "100vw" } }>
+      <Grid padded style={ { width: "100vw" } }>
 
-        <Grid.Column style={ { backgroundColor: "darkorchid", width: "15%" } }>
-          <div className='sidebar'>
-            <Icon name={ "building" } size='big' style={ { color: "white" } }></Icon>
-          </div>
+        <Grid.Column style={ { width: "10%" } }>
+          <SideBar />
         </Grid.Column>
 
-        <Grid.Column className='filter-column' style={ { width: "85%" } }>
-          <Grid.Row className='filter-row'style={{backgroundColor: "blue"}} >
-              <EmployeeFilter filteredEmp={filteredEmp} setFilteredEmp={setFilteredEmp} />
+        <Grid.Column className='filter-column' style={ { width: "90%" } }>
+          <Grid.Row className='filter-row' >
+            <EmployeeFilter filteredEmp={ filteredEmp } setFilteredEmp={ setFilteredEmp } />
           </Grid.Row>
-          <EmployeeCard filteredEmp={filteredEmp} selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
+          <EmployeeCard filteredEmp={ filteredEmp } selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
           <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
         </Grid.Column>
       </Grid>

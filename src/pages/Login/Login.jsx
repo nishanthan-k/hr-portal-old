@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Icon, Segment } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
 import "./login.css";
+import Account from "../Account/Account";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -57,6 +58,8 @@ const Login = () => {
 
 	const submitHandler = () => {
 		setFormSubmitted(!formSubmitted);
+
+
 	}
 
 	const changeHandler = () => {
@@ -67,10 +70,11 @@ const Login = () => {
 	return (
 		<div className="login">
 			<Segment className="segment">
-				<Form className="login-form" onSubmit={ () => formik.handleSubmit() }  >
+				<Form className="login-form" onSubmit={ () => { formik.handleSubmit(); } }  >
 					<div className="form-field">
 						<Form.Field>
 							<Form.Input
+								required
 								label="Username"
 								type="text"
 								name="username"
@@ -78,8 +82,8 @@ const Login = () => {
 								value={ formik.values.username }
 								onChange={ formik.handleChange }
 								onBlur={ formik.handleBlur }
-								onKeyPress = {changeHandler}
-								error={ formik.errors.username && {
+								onKeyPress={ changeHandler }
+								error={ formSubmitted && formik.errors.username && {
 									content: formik.errors.username,
 									pointing: 'below',
 								} }
@@ -89,6 +93,7 @@ const Login = () => {
 					<div className="form-field">
 						<Form.Field>
 							<Form.Input
+								required
 								label="Password"
 								type={ formik.values.showPassword ? "text" : "password" }
 								name="password"
@@ -111,7 +116,6 @@ const Login = () => {
 											)
 										}
 									/>
-
 								}
 							/>
 						</Form.Field>
