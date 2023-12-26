@@ -249,8 +249,22 @@
       "email": "ava.anderson@example.com",
       "username": "avaanderson",
       "password": "avapassword"
+    },
+    {
+      "empID": "AMP10415",
+      "firstName": "Nishanthan",
+      "lastName": "Karunakaran",
+      "fullName": "Nishanthan Karunakaran",
+      "dob": "09-10-2002",
+      "doj": "28-08-2023",
+      "age": 21,
+      "role": "Frontend Developer",
+      "exp": 0.3,
+      "src": "https://cdn2.iconfinder.com/data/icons/business-271/141/7-512.png",
+      "phoneNumber": "+1 444-555-6666",
+      "email": "nishanthan.k@example.com",
+      "username": "nishanthan",
+      "password": "pass"
     }
   ]
 }
-
-

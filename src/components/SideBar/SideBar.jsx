@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { Container, Header, Icon, Image, Menu, Segment, Sidebar } from 'semantic-ui-react'
+import { Container, Icon, Menu, Sidebar } from 'semantic-ui-react'
 
 const SideBar = () => {
   return (
@@ -14,18 +14,20 @@ const SideBar = () => {
         visible
         width='thin'
       >
-        <Menu.Item as={Link} to="/dashboard">
+        <Menu.Item as={ Link } name="dashboard" to="/dashboard">
           <Icon name='dashboard' />
           Dashboard
         </Menu.Item>
-        <Menu.Item as='a'>
-          <Icon name='gamepad' />
-          Games
+
+        <Menu.Item as={ Link } name="projects" to="/projects">
+          <Icon name='laptop' />
+          Projects
         </Menu.Item>
-          <Menu.Item as={Link} name="account" to="/account">
-            <Icon name='user circle' />
-            Account
-          </Menu.Item>
+        
+        <Menu.Item as={ Link } name="account" to="/account">
+          <Icon name='user circle' />
+          Account
+        </Menu.Item>
       </Sidebar>
     </Container>
   )

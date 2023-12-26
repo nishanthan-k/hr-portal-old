@@ -13,8 +13,11 @@ const EmployeeCard = (props) => {
     const startIndex = (currentPage - 1) * cardsPerPage;
     const endIndex = startIndex + cardsPerPage;
 
-    return props.filteredEmp.slice(startIndex, endIndex).map((emp) => (
-      <Card key={ emp.fullName } onClick={ () => props.clickHandler(emp) }>
+    return props.filteredEmp.slice(startIndex, endIndex).map((emp, index) => (
+      <Card key={ emp.fullName } onClick={ () => props.clickHandler(emp) } style={ {
+        marginBottom: '0',
+        marginTop: '0',
+      } } >
         <Image src={ emp.src } ui={ false } style={ { width: '100px', height: '100px' } } />
         <Card.Content className="card-content">
           <Card.Header>{ emp.fullName }</Card.Header>

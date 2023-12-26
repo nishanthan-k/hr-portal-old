@@ -33,8 +33,10 @@ const Dashboard = () => {
           <Grid.Row className='filter-row' >
             <EmployeeFilter filteredEmp={ filteredEmp } setFilteredEmp={ setFilteredEmp } />
           </Grid.Row>
-          <EmployeeCard filteredEmp={ filteredEmp } selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
-          <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
+          <Grid.Row className='employee-card-row'>
+            <EmployeeCard filteredEmp={ filteredEmp } selectedEmp={ selectedEmp } clickHandler={ clickHandler } />
+            <EmployeeModal selectedEmp={ selectedEmp } open={ open } setOpen={ setOpen } />
+          </Grid.Row>
         </Grid.Column>
       </Grid>
     </div>
