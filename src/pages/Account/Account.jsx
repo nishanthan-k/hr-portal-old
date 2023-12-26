@@ -1,8 +1,15 @@
 import React from 'react'
 import { Grid, Table } from 'semantic-ui-react'
 import SideBar from '../../components/SideBar/SideBar'
+import currentUser from "../../assets/data/currentUser.json"
+import empData from "../../assets/data/employeesData.json"
 
 const Account = () => {
+  const userData = empData.employees.filter((user, index) => user.userName === currentUser[0].username )
+  console.log("userData:", userData)
+  console.log("currentUser:", currentUser[0].username)
+  console.log("userData:", userData[0].src)
+
   return (
     <div>
       <Grid style={ { width: "100vw" } }>
@@ -10,16 +17,17 @@ const Account = () => {
           <SideBar />
         </Grid.Column>
         <Grid.Column  style={{width: "90%", padding: "2rem" }}>
-          <Table style={{width: "250px"}}>
+          <Table style={{width: "500px"}}>
             <Table.Body>
-              <Table.Row style={{height: "max-content"}}>
-                <Table.HeaderCell>Name: </Table.HeaderCell>
-                <Table.Cell>Romin</Table.Cell>
-              </Table.Row>
-              <Table.Row>
-                <Table.HeaderCell>Role: </Table.HeaderCell>
-                <Table.Cell>Human Resource</Table.Cell>
-              </Table.Row>
+            { Object.entries(userData[0]).map((detail, value) => (
+                (detail[0] !== "src" && (
+                  <Table.Row key={value} >
+                    <Table.HeaderCell>{ detail[0] } : </Table.HeaderCell>
+                    <Table.Cell>{ detail[1] }</Table.Cell>
+                  </Table.Row>
+                )
+                )
+              )) }
             </Table.Body>
           </Table>
         </Grid.Column>

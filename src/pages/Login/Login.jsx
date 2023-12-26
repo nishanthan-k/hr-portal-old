@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button, Form, Icon, Segment } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
+import currentUser from "../../assets/data/currentUser.json"
 import "./login.css";
-import Account from "../Account/Account";
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -40,6 +40,8 @@ const Login = () => {
 
 					if (user.length > 0) {
 						if (user[0].password === values.password) {
+							Object.assign(currentUser[0], {username: formik.values.username, password: formik.values.password})
+							console.log(currentUser[0])
 							navigate("/dashboard");
 						} else {
 							errors.password = "Wrong Password";
