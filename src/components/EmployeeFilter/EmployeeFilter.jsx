@@ -6,6 +6,7 @@ import "./employeeFilter.css";
 const filterBy = [
 	{ key: "role", text: "By Role", value: "role" },
 	{ key: "fullName", text: "By Name", value: "fullName" },
+	{ key: "empID", text: "By empID", value: "empID" },
 ];
 
 const sortBy = [
@@ -89,17 +90,17 @@ const EmployeeFilter = (props) => {
 						basic
 						floating
 						placeholder="Filter By"
-						options={filterBy}
+						options={ filterBy }
 						defaultValue="role"
-						onChange={filterHandler}
+						onChange={ filterHandler }
 					/>
 				}
 				icon="search"
 				iconPosition="left"
-				value={input}
-				onChange={(e) => {
+				value={ input }
+				onChange={ (e) => {
 					searchHandler(e);
-				}}
+				} }
 				placeholder="Search here"
 			/>
 			<Dropdown
@@ -107,9 +108,9 @@ const EmployeeFilter = (props) => {
 				basic
 				floating
 				placeholder="Sort By"
-				options={sortBy}
+				options={ sortBy }
 				defaultValue="exp"
-				onChange={sortHandler}
+				onChange={ sortHandler }
 			/>
 		</div>
 	);

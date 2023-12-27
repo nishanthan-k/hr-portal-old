@@ -37,10 +37,12 @@ const Login = () => {
 					let user = empData.employees.filter(
 						(emp, index) => emp.userName === values.username
 					);
-
+					empData.employees.map(
+						(emp, index) => console.log(emp.userName)
+					);
 					if (user.length > 0) {
 						if (user[0].password === values.password) {
-							Object.assign(currentUser[0], {username: formik.values.username, password: formik.values.password})
+							Object.assign(currentUser[0], { username: formik.values.username, password: formik.values.password })
 							console.log(currentUser[0])
 							navigate("/dashboard");
 						} else {
@@ -70,63 +72,75 @@ const Login = () => {
 	}
 
 	return (
-		<div className="login">
-			<Segment className="segment">
-				<Form className="login-form" onSubmit={ () => { formik.handleSubmit(); } }  >
-					<div className="form-field">
-						<Form.Field>
-							<Form.Input
-								required
-								label="Username"
-								type="text"
-								name="username"
-								placeholder="Username"
-								value={ formik.values.username }
-								onChange={ formik.handleChange }
-								onBlur={ formik.handleBlur }
-								onKeyPress={ changeHandler }
-								error={ formSubmitted && formik.errors.username && {
-									content: formik.errors.username,
-									pointing: 'below',
-								} }
-							/>
-						</Form.Field>
-					</div>
-					<div className="form-field">
-						<Form.Field>
-							<Form.Input
-								required
-								label="Password"
-								type={ formik.values.showPassword ? "text" : "password" }
-								name="password"
-								placeholder="Password"
-								value={ formik.values.password }
-								onChange={ formik.handleChange }
-								onBlur={ formik.handleBlur }
-								error={ formSubmitted && formik.errors.password && {
-									content: formik.errors.password,
-									pointing: 'above',
-								} }
-								icon={
-									<Icon
-										name={ formik.values.showPassword ? "eye" : "eye slash" }
-										link
-										onClick={ () =>
-											formik.setFieldValue(
-												"showPassword",
-												!formik.values.showPassword
-											)
+		<div className="login-container">
+			<div className="login">
+				<div className="login-logo-container">
+					<img src={ require("../../assets/images/hr-login.avif") } alt="HR Logo" />
+				</div>
+				<div className="login-form-container">
+					<h1 className="login-title"><span>HR</span> Portal</h1>
+					<Segment className="segment">
+						<Form className="login-form" onSubmit={ () => { formik.handleSubmit(); } }  >
+							<div className="form-field">
+								<Form.Field>
+									<Form.Input
+										required
+										label="Username"
+										type="text"
+										name="username"
+										placeholder="Username"
+										value={ formik.values.username }
+										onChange={ formik.handleChange }
+										onBlur={ formik.handleBlur }
+										onKeyPress={ changeHandler }
+										error={ formSubmitted && formik.errors.username && {
+											content: formik.errors.username,
+											pointing: 'below',
+										} }
+									/>
+								</Form.Field>
+							</div>
+							<div className="form-field">
+								<Form.Field>
+									<Form.Input
+										required
+										label="Password"
+										type={ formik.values.showPassword ? "text" : "password" }
+										name="password"
+										placeholder="Password"
+										value={ formik.values.password }
+										onChange={ formik.handleChange }
+										onBlur={ formik.handleBlur }
+										error={ formSubmitted && formik.errors.password && {
+											content: formik.errors.password,
+											pointing: 'above',
+										} }
+										icon={
+											<Icon
+												name={ formik.values.showPassword ? "eye" : "eye slash" }
+												link
+												onClick={ () =>
+													formik.setFieldValue(
+														"showPassword",
+														!formik.values.showPassword
+													)
+												}
+											/>
 										}
 									/>
-								}
-							/>
-						</Form.Field>
-					</div>
-					<Button fluid primary onClick={ () => { submitHandler(); } } >
-						Login
-					</Button>
-				</Form>
-			</Segment>
+								</Form.Field>
+							</div>
+							<Button fluid primary onClick={ () => { submitHandler(); } } >
+								Login
+							</Button>
+						</Form>
+						{/* <div className="social-accounts">
+							<Icon name="google" size="big" className="social-accounts-icon" />
+							<Icon name="microsoft" size="big" className="social-accounts-icon" />
+						</div> */}
+					</Segment>
+				</div>
+			</div>
 		</div>
 	);
 };

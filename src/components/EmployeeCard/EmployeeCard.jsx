@@ -16,7 +16,8 @@ const EmployeeCard = (props) => {
     const endIndex = startIndex + cardsPerPage;
 
     return props.filteredEmp.slice(startIndex, endIndex).map((emp, index) => (
-      <Card key={ emp.fullName } onClick={ () => props.clickHandler(emp) } style={ {
+      <div className='card-container'>
+        <Card key={ emp.fullName } onClick={ () => props.clickHandler(emp) } style={ {
         marginBottom: '0',
         marginTop: '0',
       } } >
@@ -28,6 +29,7 @@ const EmployeeCard = (props) => {
           <Card.Description>{ emp.role }</Card.Description>
         </Card.Content>
       </Card>
+      </div>
     ));
   };
 
@@ -41,7 +43,7 @@ const EmployeeCard = (props) => {
       <div className='employee-cards'>
         { renderCards() }
       </div>
-      <div>
+      <div className='pagination'>
         <Pagination
           boundaryRange={ 0 }
           defaultActivePage={ 1 }

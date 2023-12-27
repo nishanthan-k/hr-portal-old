@@ -18,12 +18,12 @@ const Dashboard = () => {
 
   return (
     <div className='dashboard-container'>
-      <Grid style={{ width: '100vw', margin: 0 }}>
+      <Grid style={{ width: '100%', margin: 0 }}>
         <Grid.Row className='filter-row'>
           <EmployeeFilter filteredEmp={filteredEmp} setFilteredEmp={setFilteredEmp} />
         </Grid.Row>
         <Grid.Row className='employee-card-row'>
-          <Grid.Column width={14}>
+          <Grid.Column width={16}>
             <EmployeeCard filteredEmp={filteredEmp} selectedEmp={selectedEmp} clickHandler={clickHandler} />
           </Grid.Column>
           <Grid.Column width={4}>

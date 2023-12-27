@@ -15,9 +15,6 @@ const Projects = () => {
   return (
     <div>
       <Grid style={ { width: "100vw" } }>
-        <Grid.Column style={ { width: "12%" } }>
-          <SideBar />
-        </Grid.Column>
         <Grid.Column style={ { width: "88%", padding: "20px" } }>
           <Item.Group divided >
 

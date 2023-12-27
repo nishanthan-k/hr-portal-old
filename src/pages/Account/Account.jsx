@@ -6,19 +6,11 @@ import empData from "../../assets/data/employeesData.json"
 
 const Account = () => {
   let userData = empData.employees.filter((user, index) => user.userName === currentUser[0].username );
-  if (!userData) {
-    userData = empData.employees[0];;
-  }
-  console.log("userData:", userData)
-  console.log("currentUser:", currentUser[0].username)
-  console.log("userData:", userData[0].src)
 
   return (
     <div>
       <Grid style={ { width: "100vw" } }>
-        <Grid.Column style={{width: "10%"}}>
-          <SideBar />
-        </Grid.Column>
+
         <Grid.Column  style={{width: "90%", padding: "2rem" }}>
           <Table style={{width: "500px"}}>
             <Table.Body>
