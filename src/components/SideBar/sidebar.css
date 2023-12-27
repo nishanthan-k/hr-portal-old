@@ -8,13 +8,15 @@
   background: rgb(184, 10, 184);
   gap: 20px;
   border: 1px solid lightgray;
+  background: rgb(63, 94, 251);
+  background: radial-gradient(circle, rgba(63, 94, 251, 1) 0%, rgba(252, 70, 107, 1) 100%);
+
 }
 
-.menu {
+.menu-item {
   color: white;
   display: flex;
   flex-direction: column;
   align-items: center;
   font-size: 15px;
 }
-
