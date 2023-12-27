@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Grid, Item } from 'semantic-ui-react';
 import projectData from "../../assets/data/projectDetails.json";
-import SideBar from '../../components/SideBar/SideBar';
 
 const Projects = () => {
   const navigate = useNavigate();

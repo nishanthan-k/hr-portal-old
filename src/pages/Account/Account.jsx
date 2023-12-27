@@ -1,6 +1,5 @@
 import React from 'react'
 import { Grid, Table } from 'semantic-ui-react'
-import SideBar from '../../components/SideBar/SideBar'
 import currentUser from "../../assets/data/currentUser.json"
 import empData from "../../assets/data/employeesData.json"
 
