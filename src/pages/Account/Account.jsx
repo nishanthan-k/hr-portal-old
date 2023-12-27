@@ -5,7 +5,10 @@ import currentUser from "../../assets/data/currentUser.json"
 import empData from "../../assets/data/employeesData.json"
 
 const Account = () => {
-  const userData = empData.employees.filter((user, index) => user.userName === currentUser[0].username )
+  let userData = empData.employees.filter((user, index) => user.userName === currentUser[0].username );
+  if (!userData) {
+    userData = empData.employees[0];;
+  }
   console.log("userData:", userData)
   console.log("currentUser:", currentUser[0].username)
   console.log("userData:", userData[0].src)

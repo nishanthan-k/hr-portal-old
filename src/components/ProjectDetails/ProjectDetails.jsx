@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
-import { useLocation } from 'react-router-dom'
-import { Grid, Header, Table } from 'semantic-ui-react';
-import SideBar from '../SideBar/SideBar';
+import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { Grid, Table } from 'semantic-ui-react';
+import empData from "../../assets/data/employeesData.json";
 import EmployeeCard from '../EmployeeCard/EmployeeCard';
-import empData from "../../assets/data/employeesData.json"
 import EmployeeModal from '../EmployeeModal/EmployeeModal';
+import SideBar from '../SideBar/SideBar';
 
 const ProjectDetails = (props) => {
   const location = useLocation();

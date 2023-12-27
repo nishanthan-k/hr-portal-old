@@ -17,31 +17,24 @@ const EmployeeFilter = (props) => {
 	const [filterOption, setFilterOption] = useState("role" || "");
 	const [sortOption, setSortOption] = useState("exp");
 	const [input, setInput] = useState("");
-	const [validSearch, setValidSearch] = useState(true);
 
 	const searchHandler = (e) => {
 		setInput(e.target.value);
-		// console.log("set input:", input);
 	};
 
 	const filterHandler = (event, { value }) => {
-		// console.log(value);
-		let bird_name = event.target.textContent;
+		// let bird_name = event.target.textContent;
 		// console.log(bird_name);
 		setFilterOption(value);
 	};
 
 	const sortHandler = (event, { value }) => {
-		// console.log(value);
-		let bird_name = event.target.textContent;
-		// console.log(bird_name);
 		setSortOption(value);
 	};
 
 	function sortDataBy(data, byKey) {
 		let sortedData = data;
 		if (byKey === "exp") {
-			// console.log("sorting by exp");
 			sortedData = data.sort(function (a, b) {
 				return b.exp - a.exp;
 			});
@@ -54,11 +47,6 @@ const EmployeeFilter = (props) => {
 			sortedData.forEach((emp) => delete emp.dateFormat);
 		}
 
-		console.log(
-			"sortedData:",
-			sortedData,
-			"-----------------------------------------------------------------------------------"
-		);
 		return sortedData;
 	}
 
@@ -74,67 +62,29 @@ const EmployeeFilter = (props) => {
 						.replace(" ", "")
 						.includes(input.toLowerCase().replace(" ", ""))
 				) {
-					// console.log(emp["fullName"], emp[filterOption]);
 					data.push(emp);
-					setValidSearch(true);
 				}
+				return [];
 			});
 		}
 
-		// console.log("doj", sortOption);
-
-		temp.map((emp, index) => {
-			// console.log(typeof emp.exp, emp.exp);
-		});
-
-		// if (sortOption) {
 		sortDataBy(data, sortOption);
-		// }
 
 		if (data.length > 0 && input.length !== 0) {
-			// console.log("gt", input)
 			props.setFilteredEmp(data);
 		} else {
-			// console.log("lt", input)
-			// props.setFilteredEmp("No Input");
-			props.setFilteredEmp(temp);
-			// console.log(
-				// typeof props.filteredEmp,
-				// "--------------------------------------------------------"
-			// );
 		}
 
 		if (input.length === 0) {
-			// console.log("zero", input)
 			props.setFilteredEmp(temp);
 		}
-	}, [input, filterOption, sortOption]);
+	}, [input, filterOption, sortOption, props]);
 
 	return (
-		// <div className='filter-bar'>
-		//   <Input
-		//     action={
-		//       <Dropdown
-		//         button basic floating placeholder='Filter By' options={ filterBy } defaultValue='role' onChange={ filterHandler } />
-		//     }
-		//     icon='search'
-		//     iconPosition='left'
-		//     value={ input }
-		//     onChange={(e) => {searchHandler(e);} }
-		//     placeholder="Search here"
-		//   />
-		//   <Dropdown
-		//     button basic floating placeholder='Sort By' options={ sortBy } defaultValue="exp" onChange={sortHandler}
-		//   />
-		// </div>
-		<div
-			className="filter-bar"
-			style={{ backgroundColor: "white", width: "450px" }}
-		>
+		<div className="filter-bar">
 			<Input
 				action={
 					<Dropdown
-						compact // Add the compact prop here
 						button
 						basic
 						floating
@@ -153,7 +103,6 @@ const EmployeeFilter = (props) => {
 				placeholder="Search here"
 			/>
 			<Dropdown
-				compact // Add the compact prop here
 				button
 				basic
 				floating

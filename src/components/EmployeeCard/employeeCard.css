@@ -1,40 +1,29 @@
 .employee-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 30px;
+  align-items: center; 
+  overflow: auto;
+  position: relative;
 }
 
 .employee-cards {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
   gap: 30px;
-  padding: .5rem;
-  margin-top: 50px;
 }
 
 .card {
-  height: max-content;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
 
-.card:hover {
-  cursor: pointer;
-}
-
-.card-content{
+.card-content {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-}
-
-@media screen and (max-width: 760px) {
-  .employee-cards {
-    margin-top: 100px;
-  }
 }

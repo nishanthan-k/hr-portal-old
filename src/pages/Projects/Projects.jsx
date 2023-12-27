@@ -1,28 +1,11 @@
-import React, { useState } from 'react';
-import { Grid, Item } from 'semantic-ui-react';
-import empData from "../../assets/data/employeesData.json";
-import projectData from "../../assets/data/projectDetails.json";
-import EmployeeCard from '../../components/EmployeeCard/EmployeeCard';
-import SideBar from '../../components/SideBar/SideBar';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Grid, Item } from 'semantic-ui-react';
+import projectData from "../../assets/data/projectDetails.json";
+import SideBar from '../../components/SideBar/SideBar';
 
 const Projects = () => {
   const navigate = useNavigate();
-  const [open, setOpen] = useState(false);
-  const [showDevelopers, setShowDevelopers] = useState(false);
-  const [selectedEmp, setSelectedEmp] = useState(open || "");
-
-  const fetchDevelopers = (teamMembers) => {
-    let arr = empData.employees.filter((emp, index) => teamMembers.includes(emp.empID))
-    console.log("arr:", arr);
-
-    return arr;
-  }
-
-  const clickHandler = (emp) => {
-    setOpen(!open);
-    setSelectedEmp(emp);
-  }
 
   const fetchDetails = (project) => {
     console.log("fetch details")
