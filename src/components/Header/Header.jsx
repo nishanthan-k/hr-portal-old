@@ -8,10 +8,21 @@ import { useNavigate } from 'react-router-dom';
 const Header = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true);
-  if (currentUser.username === "") {
-    setLoggedIn(false);
-    currentUser = empData.employess[0];
+
+  const user = () => {
+    let u = [];
+    u.push(empData.employees[0])
+
+    return u;
   }
+
+  if (currentUser.length === 0) {
+    setLoggedIn(false);
+    currentUser = user();
+  }
+
+  console.log(currentUser)
+
   return (
     <div className='header-container'>
       <div className='header-content'>

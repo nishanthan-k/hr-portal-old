@@ -11,7 +11,7 @@ const Leave = () => {
 		return [];
 	});
 
-	console.log(empProfile);
+	// console.log(empProfile);
 
 	const initialStatus = leaveData.map(() => ({
 		approved: false,
@@ -30,86 +30,100 @@ const Leave = () => {
 			};
 			return updatedStatusArray;
 		});
+		updateJson(sign, rowIndex);
+	};
+	
+	// console.log("statusArray:", statusArray)
+	const formatHeader = (label) => {
+		const words = label.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g);
+		const header = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
+
+		return words ? header : label;
 	};
 
-  const formatHeader = (label) => {
-    const words = label.match(/[A-Z]+(?![a-z])|[A-Z]?[a-z]+|\d+/g);
-    const header = words.map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(" ");
-
-    return words ? header : label;
-  };
-  
-
+	const updateJson = (sign, rowIndex) => {
+		leaveData.map((user, userIndex) => {
+			if (rowIndex === userIndex) {
+				if (sign === "approve") {
+					user.status = true;
+				} else {
+					user.status = false;
+				}
+			}
+			return []
+			// console.log("user:", user);
+		})
+	}
 
 	return (
 		<div className="table-container">
 			<Table
 				className="table"
-				style={{ width: "850px", margin: "20px auto", border: "1px solid" }}
+				style={ { width: "850px", margin: "20px auto", border: "1px solid" } }
 			>
 				<Table.Header className="table-header">
 					<Table.Row className="table-header-row">
-						{Object.entries(leaveData[0]).map(
+						{ Object.entries(leaveData[0]).map(
 							(data, value) =>
 								data[0] !== "status" && (
 									<Table.HeaderCell
 										className="table-header-cell"
-										key={value}
+										key={ value }
 										textAlign="center"
 									>
-										{formatHeader(data[0])}
+										{ formatHeader(data[0]) }
 									</Table.HeaderCell>
 								)
-						)}
+						) }
 						<Table.HeaderCell className="table-header-cell" textAlign="center">
 							Approval
 						</Table.HeaderCell>
 					</Table.Row>
 				</Table.Header>
 				<Table.Body>
-					{leaveData.map((user, rowIndex) => (
-						<Table.Row key={rowIndex}>
-							{Object.entries(user).map(
+					{ leaveData.map((user, rowIndex) => (
+						<Table.Row key={ rowIndex }>
+							{ Object.entries(user).map(
 								(data, detail) =>
 									data[0] !== "status" && (
 										<Table.Cell
 											className={
 												detail === 0 ? "table-first-cell" : "table-cell"
 											}
-											key={detail}
+											key={ detail }
 											textAlign="center"
 										>
-											{data[1]}
+											{ data[1] }
 										</Table.Cell>
 									)
-							)}
+							) }
 							<Table.Cell className="table-cell" textAlign="center">
-								{!statusArray[rowIndex].approved &&
-								!statusArray[rowIndex].declined ? (
+								{ !statusArray[rowIndex].approved &&
+									!statusArray[rowIndex].declined ? (
 									<>
 										<Button
 											positive
 											content="Approve"
-											onClick={() => {
+											onClick={ () => {
 												statusHandler("approve", rowIndex);
-											}}
+											} }
 										/>
 										<Button
 											negative
 											content="Decline"
-											onClick={() => {
+											onClick={ () => {
 												statusHandler("decline", rowIndex);
-											}}
+											} }
 										/>
 									</>
 								) : statusArray[rowIndex].approved ? (
 									<Button positive content="Approved" />
 								) : (
 									<Button negative content="Declined" />
-								)}
+								) }
 							</Table.Cell>
 						</Table.Row>
-					))}
+					)) }
 				</Table.Body>
 			</Table>
 		</div>

@@ -3,11 +3,11 @@ import { Card, Image, Pagination } from "semantic-ui-react";
 import "./employeeCard.css";
 
 const EmployeeCard = (props) => {
-	console.log(
-		"props.filteredEmp:",
-		props.filteredEmp,
-		props.filteredEmp.length
-	);
+	// console.log(
+	// 	"props.filteredEmp:",
+	// 	props.filteredEmp,
+	// 	props.filteredEmp.length
+	// );
 
 	const cardsPerPage = 10;
 	const totalPages = Math.ceil(props.filteredEmp.length / cardsPerPage);
@@ -45,7 +45,7 @@ const EmployeeCard = (props) => {
 
 	const handlePageChange = (e, { activePage }) => {
 		setCurrentPage(activePage);
-		console.log("Page changed to", activePage);
+		// console.log("Page changed to", activePage);
 	};
 
 	return (
