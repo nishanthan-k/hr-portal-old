@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { Button, Form, Icon, Segment } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
 import currentUser from "../../assets/data/currentUser.json"
-import "./login.css";
+import "./Login.scss"
 
 const Login = () => {
 	const navigate = useNavigate();
@@ -37,9 +37,7 @@ const Login = () => {
 					let user = empData.employees.filter(
 						(emp, index) => emp.userName === values.username
 					);
-					// empData.employees.map(
-					// 	// (emp, index) => console.log(emp.userName)
-					// );
+
 					if (user.length > 0) {
 						if (user[0].password === values.password) {
 							Object.assign(currentUser[0], { username: formik.values.username, password: formik.values.password })
@@ -62,8 +60,6 @@ const Login = () => {
 
 	const submitHandler = () => {
 		setFormSubmitted(!formSubmitted);
-
-
 	}
 
 	const changeHandler = () => {
@@ -75,7 +71,7 @@ const Login = () => {
 		<div className="login-container">
 			<div className="login">
 				<div className="login-logo-container">
-					<img src={ require("../../assets/images/hr-login.avif") } alt="HR Logo" />
+					<img className="login-logo-img" src={ require("../../assets/images/hr-login.avif") } alt="HR Logo" />
 				</div>
 				<div className="login-form-container">
 					<h1 className="login-title"><span>HR</span> Portal</h1>

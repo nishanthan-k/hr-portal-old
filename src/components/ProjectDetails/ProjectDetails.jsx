@@ -4,7 +4,6 @@ import { Grid, Table } from 'semantic-ui-react';
 import empData from "../../assets/data/employeesData.json";
 import EmployeeCard from '../EmployeeCard/EmployeeCard';
 import EmployeeModal from '../EmployeeModal/EmployeeModal';
-import SideBar from '../SideBar/SideBar';
 
 const ProjectDetails = (props) => {
   const location = useLocation();
@@ -29,9 +28,9 @@ const ProjectDetails = (props) => {
   return (
     <div>
       <Grid style={ { width: "100vw" } }>
-        <Grid.Column style={ { width: "12%" } }>
+        {/* <Grid.Column style={ { width: "12%" } }>
           <SideBar />
-        </Grid.Column>
+        </Grid.Column> */}
         <Grid.Column style={ { width: "88%", padding: "2rem" } }>
           <Table >
             <Table.Body>

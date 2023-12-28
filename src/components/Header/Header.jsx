@@ -9,7 +9,7 @@ const Header = () => {
   const [loggedIn, setLoggedIn] = useState(true);
 
   const handleLogout = () => {
-    navigate("/");
+    navigate("/login");
     setLoggedIn(false);
   }
 
