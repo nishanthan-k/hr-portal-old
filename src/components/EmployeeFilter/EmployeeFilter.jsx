@@ -1,120 +1,97 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
 import "./employeeFilter.css";
 
 const filterBy = [
-	{ key: "role", text: "By Role", value: "role" },
-	{ key: "fullName", text: "By Name", value: "fullName" },
-	{ key: "empID", text: "By empID", value: "empID" },
+  { key: "role", text: "By Role", value: "role" },
+  { key: "fullName", text: "By Name", value: "fullName" },
+  { key: "empID", text: "By empID", value: "empID" },
 ];
 
 const sortBy = [
-	{ key: "doj", text: "By DOJ", value: "doj" },
-	{ key: "exp", text: "By Exp", value: "exp" },
+  { key: "doj", text: "By DOJ", value: "doj" },
+  { key: "exp", text: "By Exp", value: "exp" },
 ];
 
 const EmployeeFilter = (props) => {
-	const [filterOption, setFilterOption] = useState("role" || "");
-	const [sortOption, setSortOption] = useState("exp");
-	const [input, setInput] = useState("");
+  const [filterOption, setFilterOption] = useState("role");
+  const [sortOption, setSortOption] = useState("exp");
+  const [input, setInput] = useState("");
+  // const [filteredData, setFilteredData] = useState(empData.employees);
 
-	const searchHandler = (e) => {
-		setInput(e.target.value);
-	};
+  const searchHandler = (e) => {
+    const inputValue = e.target.value;
+    setInput(inputValue);
+		filterAndSortData(inputValue, filterOption, sortOption);
+    // const updatedData = filterAndSortData(inputValue, filterOption, sortOption);
+    // setFilteredData(updatedData);
+  };
 
-	const filterHandler = (event, { value }) => {
-		// let bird_name = event.target.textContent;
-		// console.log(bird_name);
-		setFilterOption(value);
-	};
+  const filterHandler = (event, { value }) => {
+    setFilterOption(value);
+		filterAndSortData(input, value, sortOption);
+    // const updatedData = filterAndSortData(input, value, sortOption);
+    // setFilteredData(updatedData);
+  };
 
-	const sortHandler = (event, { value }) => {
-		setSortOption(value);
-	};
+  const sortHandler = (event, { value }) => {
+    setSortOption(value);
+		filterAndSortData(input, value, sortOption);
+    // const updatedData = filterAndSortData(input, filterOption, value);
+    // setFilteredData(updatedData);
+  };
 
-	function sortDataBy(data, byKey) {
-		let sortedData = data;
-		if (byKey === "exp") {
-			sortedData = data.sort(function (a, b) {
-				return b.exp - a.exp;
-			});
-		} else {
-			sortedData.forEach((emp, index) => {
-				let parts = emp.doj.split("-");
-				sortedData.dateFormat = new Date(parts[2], parts[1] - 1, parts[0]);
-			});
-			sortedData = sortedData.sort((a, b) => a.dateFormat - b.dateFormat);
-			sortedData.forEach((emp) => delete emp.dateFormat);
-		}
+  const filterAndSortData = (searchInput, filter, sort) => {
+    let filteredData = empData.employees;
 
-		return sortedData;
-	}
+    if (searchInput) {
+      filteredData = filteredData.filter((emp) =>
+        emp[filter].toLowerCase().includes(searchInput.toLowerCase())
+      );
+    }
 
-	useEffect(() => {
-		let temp = empData.employees.filter((emp, input) => emp);
-		let data = [];
+    if (sort === "exp") {
+      filteredData.sort((a, b) => b.exp - a.exp);
+    } else {
+      filteredData.sort((a, b) => new Date(a.doj) - new Date(b.doj));
+    }
 
-		if (input) {
-			temp.map((emp, index) => {
-				if (
-					emp[filterOption]
-						.toLowerCase()
-						.replace(" ", "")
-						.includes(input.toLowerCase().replace(" ", ""))
-				) {
-					data.push(emp);
-				}
-				return [];
-			});
-		}
+		props.setFilteredEmp(filteredData)
+    return filteredData;
+  };
 
-		sortDataBy(data, sortOption);
-
-		if (input) {
-			if (data) {
-				props.setFilteredEmp(data);
-			} else {
-				props.setFilteredEmp(null)
-			}
-		} else {
-			props.setFilteredEmp(empData.employees)
-		}
-	}, [input, filterOption, sortOption, props]);
-
-	return (
-		<div className="filter-bar">
-			<Input
-				action={
-					<Dropdown
-						button
-						basic
-						floating
-						placeholder="Filter By"
-						options={ filterBy }
-						defaultValue="role"
-						onChange={ filterHandler }
-					/>
-				}
-				icon="search"
-				iconPosition="left"
-				value={ input }
-				onChange={ (e) => {
-					searchHandler(e);
-				} }
-				placeholder="Search here"
-			/>
-			<Dropdown
-				button
-				basic
-				floating
-				placeholder="Sort By"
-				options={ sortBy }
-				defaultValue="exp"
-				onChange={ sortHandler }
-			/>
-		</div>
-	);
+  return (
+    <div className="filter-bar">
+      <Input
+        action={
+          <Dropdown
+            button
+            basic
+            floating
+            placeholder="Filter By"
+            options={filterBy}
+            value={filterOption}
+            onChange={filterHandler}
+          />
+        }
+        icon="search"
+        iconPosition="left"
+        value={input}
+        onChange={(e) => searchHandler(e)}
+        placeholder="Search here"
+      />
+      <Dropdown
+        button
+        basic
+        floating
+        placeholder="Sort By"
+        options={sortBy}
+        value={sortOption}
+        onChange={sortHandler}
+      />
+    </div>
+  );
 };
 
 export default EmployeeFilter;

@@ -19,7 +19,7 @@ const EmployeeCard = (props) => {
 
 		return props.filteredEmp.length !== 0 ? (
 			props.filteredEmp.slice(startIndex, endIndex).map((emp, index) => (
-				<div className="card-container">
+				<div className="card-container" key={index}>
 					<Card
 						key={ emp.fullName }
 						onClick={ () => props.clickHandler(emp) }
@@ -43,7 +43,7 @@ const EmployeeCard = (props) => {
 				</div>
 			))
 		) : (
-			<h2>No Results!</h2>
+			<h2>No Results Found!</h2>
 		)
 	};
 

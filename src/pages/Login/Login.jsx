@@ -22,9 +22,9 @@ const Login = () => {
 		validate: (values) => {
 			// setFormSubmitted(!formSubmitted)
 			let errors = {};
-			console.log("formSubmitted?", formSubmitted)
+			// console.log("formSubmitted?", formSubmitted)
 			if (formSubmitted) {
-				console.log("submitted")
+				// console.log("submitted")
 				if (!values.username) {
 					errors.username = "Username is required";
 				}
@@ -37,13 +37,13 @@ const Login = () => {
 					let user = empData.employees.filter(
 						(emp, index) => emp.userName === values.username
 					);
-					empData.employees.map(
-						(emp, index) => console.log(emp.userName)
-					);
+					// empData.employees.map(
+					// 	// (emp, index) => console.log(emp.userName)
+					// );
 					if (user.length > 0) {
 						if (user[0].password === values.password) {
 							Object.assign(currentUser[0], { username: formik.values.username, password: formik.values.password })
-							console.log(currentUser[0])
+							// console.log(currentUser[0])
 							navigate("/dashboard");
 						} else {
 							errors.password = "Wrong Password";
@@ -58,7 +58,7 @@ const Login = () => {
 		},
 	});
 
-	console.log("submit:", formSubmitted)
+	// console.log("submit:", formSubmitted)
 
 	const submitHandler = () => {
 		setFormSubmitted(!formSubmitted);
@@ -68,7 +68,7 @@ const Login = () => {
 
 	const changeHandler = () => {
 		setFormSubmitted(false);
-		console.log("change")
+		// console.log("change")
 	}
 
 	return (

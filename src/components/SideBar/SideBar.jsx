@@ -1,34 +1,72 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-import { Container, Icon, Menu } from 'semantic-ui-react'
-import "./sidebar.css"
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { Icon, Menu } from 'semantic-ui-react';
+import './sidebar.css';
 
 const SideBar = () => {
+  const [activeItem, setActiveItem] = useState('dashboard');
+
+  const handleItemClick = (name) => {
+    if (name !== activeItem) {
+      setActiveItem(name === activeItem ? '' : name);
+    }
+  };
+
   return (
-    <Container>
-      <div className='sidebar'>
-        <div className='menu-item' as={ Link } name="dashboard" to="/dashboard">
+    <div className='sidebar'>
+
+      {/* <Link to="/dashboard" > */ }
+      {/* <div onClick={() => navigate("/dashboard") } className={ `menu-item ${activeItem === 'dashboard' ? 'active' : ''}` } >
           <Icon size='big' name='chart bar outline' />
           Dashboard
-        </div>
+        </div> */}
+      {/* </Link> */ }
 
-        <div className='menu-item' as={ Link } name="projects" to="/projects">
-          <Icon size='big' name='laptop' />
-          Projects
-        </div>
+      <Menu.Item
+        className={ `menu-item ${activeItem === 'dashboard' ? 'active' : ''}` }
+        as={ Link }
+        name='dashboard'
+        to='/dashboard'
+        onClick={ () => handleItemClick('dashboard') }
+      >
+        <Icon size='big' name='chart bar outline' />
+        Dashboard
+      </Menu.Item>
 
-        <div className='menu-item' as={ Link } name="leave" to="/leave">
-          <Icon size='big' name='calendar check' />
-          Leave
-        </div>
+      <Menu.Item
+        className={ `menu-item ${activeItem === 'projects' ? 'active' : ''}` }
+        as={ Link }
+        name='projects'
+        to='/projects'
+        onClick={ () => handleItemClick('projects') }
+      >
+        <Icon size='big' name='laptop' />
+        Projects
+      </Menu.Item>
 
-        <div className='menu-item' as={ Link } name="account" to="/account">
-          <Icon size='big' name='user circle' />
-          Account
-        </div>
-      </div>
-    </Container>
-  )
-}
+      <Menu.Item
+        className={ `menu-item ${activeItem === 'leave' ? 'active' : ''}` }
+        as={ Link }
+        name='leave'
+        to='/leave'
+        onClick={ () => handleItemClick('leave') }
+      >
+        <Icon size='big' name='calendar check' />
+        Leave
+      </Menu.Item>
 
-export default SideBar
+      <Menu.Item
+        className={ `menu-item ${activeItem === 'account' ? 'active' : ''}` }
+        as={ Link }
+        name='account'
+        to='/account'
+        onClick={ () => handleItemClick('account') }
+      >
+        <Icon size='big' name='user circle' />
+        Account
+      </Menu.Item>
+    </div>
+  );
+};
+
+export default SideBar;

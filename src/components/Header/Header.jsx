@@ -1,19 +1,17 @@
-import React, { useState } from 'react'
-import "./Header.css"
-import currentUser from "../../assets/data/currentUser.json"
-import empData from "../../assets/data/employeesData.json"
-import { Button } from 'semantic-ui-react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Button } from 'semantic-ui-react';
+import currentUser from "../../assets/data/currentUser.json";
+import "./Header.css";
 
 const Header = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true);
 
-  if (!currentUser[0].username) {
-    console.log('no user');
-    console.log(currentUser);
+  const handleLogout = () => {
+    navigate("/");
+    setLoggedIn(false);
   }
-
 
   return (
     <div className='header-container'>
@@ -28,7 +26,7 @@ const Header = () => {
       <div>
         { loggedIn ? (
           <div>
-            <Button content="Logout" onClick={ () => { navigate("/") } } />
+            <Button content="Logout" onClick={ handleLogout } />
           </div>
         ) : (
           <div>
