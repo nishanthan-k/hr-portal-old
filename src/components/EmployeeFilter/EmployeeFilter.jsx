@@ -71,13 +71,14 @@ const EmployeeFilter = (props) => {
 
 		sortDataBy(data, sortOption);
 
-		if (data.length > 0 && input.length !== 0) {
-			props.setFilteredEmp(data);
+		if (input) {
+			if (data) {
+				props.setFilteredEmp(data);
+			} else {
+				props.setFilteredEmp(null)
+			}
 		} else {
-		}
-
-		if (input.length === 0) {
-			props.setFilteredEmp(temp);
+			props.setFilteredEmp(empData.employees)
 		}
 	}, [input, filterOption, sortOption, props]);
 

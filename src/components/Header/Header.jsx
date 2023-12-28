@@ -9,30 +9,26 @@ const Header = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true);
 
-  const user = () => {
-    let u = [];
-    u.push(empData.employees[0])
-
-    return u;
+  if (!currentUser[0].username) {
+    console.log('no user');
+    console.log(currentUser);
   }
 
-  if (currentUser.length === 0) {
-    setLoggedIn(false);
-    currentUser = user();
-  }
-
-  console.log(currentUser)
 
   return (
     <div className='header-container'>
       <div className='header-content'>
         <img className='hr-logo' src={ require("../../assets/images/hr-icon.jpg") } alt="HR Logo" />
-        <h2>Welcome { currentUser[0].username.toUpperCase() } !</h2>
+        { currentUser[0].username ? (
+          <h2>Welcome { currentUser[0].username.toUpperCase() }</h2>
+        ) : (
+          <h2>Welcome User</h2>
+        ) }
       </div>
       <div>
         { loggedIn ? (
           <div>
-            <Button content="Logout" onClick={() => {navigate("/")}}/>
+            <Button content="Logout" onClick={ () => { navigate("/") } } />
           </div>
         ) : (
           <div>
