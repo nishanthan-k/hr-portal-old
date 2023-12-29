@@ -42,13 +42,14 @@ const Header = () => {
             <Button content="Login" />
           </div>
         ) }
-        { showSideBar && (
-          <div className='show-sidebar'>
-            <div className='close-icon'>
-              <Icon name="close" size='big' onClick={toggleSideBar} />
-            </div>
-            <SideBar />
-          </div>) }
+        {/* { showSideBar && ( */ }
+        <div className={ showSideBar ? 'header-sidebar show' : 'header-sidebar hide' }>
+          <div className='close-icon'>
+            <Icon name="close" size='big' onClick={ toggleSideBar } />
+          </div>
+          <SideBar />
+        </div>
+        {/* )} */ }
       </div>
     </div >
   )

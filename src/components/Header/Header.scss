@@ -23,7 +23,11 @@
     align-items: center;
   }
 
-  .show-sidebar {
+  .header-sidebar.hide {
+    display: none;
+  }
+
+  .header-sidebar.show {
     width: 150px;
     position: absolute;
     right: 0px;
@@ -42,7 +46,8 @@
       margin-top: 20px;
     }
 
-    .close-icon:hover, .toggle-icon:hover {
+    .close-icon:hover,
+    .toggle-icon:hover {
       cursor: pointer;
     }
   }
