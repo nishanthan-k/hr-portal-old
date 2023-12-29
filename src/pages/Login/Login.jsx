@@ -74,6 +74,7 @@ const Login = () => {
 					<img className="login-logo-img" src={ require("../../assets/images/hr-login.avif") } alt="HR Logo" />
 				</div>
 				<div className="login-form-container">
+					<img src={ require("../../assets/images/hr-icon.jpeg") } alt="hr-logo" className="hr-logo-round" />
 					<h1 className="login-title"><span>HR</span> Portal</h1>
 					<Segment className="segment">
 						<Form className="login-form" onSubmit={ () => { formik.handleSubmit(); } }  >

@@ -1,17 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Button } from 'semantic-ui-react';
+import { Button, Icon } from 'semantic-ui-react';
 import currentUser from "../../assets/data/currentUser.json";
-import "./Header.css";
+import "./Header.scss"
+import SideBar from '../SideBar/SideBar';
 
 const Header = () => {
   const navigate = useNavigate();
   const [loggedIn, setLoggedIn] = useState(true);
+  const [showSideBar, setShowSideBar] = useState(false);
 
   const handleLogout = () => {
     navigate("/login");
     setLoggedIn(false);
   }
+
+  const toggleSideBar = () => setShowSideBar(!showSideBar);
 
   return (
     <div className='header-container'>
@@ -23,16 +27,28 @@ const Header = () => {
           <h2>Welcome User</h2>
         ) }
       </div>
-      <div>
+      <div className='header-functions'>
         { loggedIn ? (
-          <div>
-            <Button content="Logout" onClick={ handleLogout } />
+          <div className='header-buttons'>
+            <div className='logout-btn'>
+              <Button content="Logout" onClick={ handleLogout } />
+            </div>
+            { !showSideBar && <div className='toggle-bar' onClick={ toggleSideBar }>
+              <Icon name='bars' size='big' className='toggle-icon' />
+            </div> }
           </div>
         ) : (
           <div>
             <Button content="Login" />
           </div>
         ) }
+        { showSideBar && (
+          <div className='show-sidebar'>
+            <div className='close-icon'>
+              <Icon name="close" size='big' onClick={toggleSideBar} />
+            </div>
+            <SideBar />
+          </div>) }
       </div>
     </div >
   )

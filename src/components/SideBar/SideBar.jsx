@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Icon, Menu } from 'semantic-ui-react';
-import './sidebar.css';
+import "./SideBar.scss"
 
 const SideBar = () => {
   const [activeItem, setActiveItem] = useState('dashboard');
