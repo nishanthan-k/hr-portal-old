@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
-import "./employeeFilter.css";
+// import "./employeeFilter.css";
+import "./EmployeeFilter.scss"
 
 const filterBy = [
   { key: "role", text: "By Role", value: "role" },
@@ -23,21 +24,21 @@ const EmployeeFilter = (props) => {
   const searchHandler = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
-		filterAndSortData(inputValue, filterOption, sortOption);
+    filterAndSortData(inputValue, filterOption, sortOption);
     // const updatedData = filterAndSortData(inputValue, filterOption, sortOption);
     // setFilteredData(updatedData);
   };
 
   const filterHandler = (event, { value }) => {
     setFilterOption(value);
-		filterAndSortData(input, value, sortOption);
+    filterAndSortData(input, value, sortOption);
     // const updatedData = filterAndSortData(input, value, sortOption);
     // setFilteredData(updatedData);
   };
 
   const sortHandler = (event, { value }) => {
     setSortOption(value);
-		filterAndSortData(input, value, sortOption);
+    filterAndSortData(input, value, sortOption);
     // const updatedData = filterAndSortData(input, filterOption, value);
     // setFilteredData(updatedData);
   };
@@ -57,7 +58,7 @@ const EmployeeFilter = (props) => {
       filteredData.sort((a, b) => new Date(a.doj) - new Date(b.doj));
     }
 
-		props.setFilteredEmp(filteredData)
+    props.setFilteredEmp(filteredData)
     return filteredData;
   };
 
@@ -70,26 +71,28 @@ const EmployeeFilter = (props) => {
             basic
             floating
             placeholder="Filter By"
-            options={filterBy}
-            value={filterOption}
-            onChange={filterHandler}
+            options={ filterBy }
+            value={ filterOption }
+            onChange={ filterHandler }
           />
         }
         icon="search"
         iconPosition="left"
-        value={input}
-        onChange={(e) => searchHandler(e)}
+        value={ input }
+        onChange={ (e) => searchHandler(e) }
         placeholder="Search here"
       />
-      <Dropdown
-        button
-        basic
-        floating
-        placeholder="Sort By"
-        options={sortBy}
-        value={sortOption}
-        onChange={sortHandler}
-      />
+      <div className="dropdown-container">
+        <Dropdown
+          button
+          basic
+          floating
+          placeholder="Sort By"
+          options={ sortBy }
+          value={ sortOption }
+          onChange={ sortHandler }
+        />
+      </div>
     </div>
   );
 };
