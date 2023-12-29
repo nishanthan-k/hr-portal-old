@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Dropdown, Input } from "semantic-ui-react";
 import empData from "../../assets/data/employeesData.json";
-// import "./employeeFilter.css";
-import "./EmployeeFilter.scss"
+import "./EmployeeFilter.scss";
 
 const filterBy = [
   { key: "role", text: "By Role", value: "role" },
@@ -19,32 +18,25 @@ const EmployeeFilter = (props) => {
   const [filterOption, setFilterOption] = useState("role");
   const [sortOption, setSortOption] = useState("exp");
   const [input, setInput] = useState("");
-  // const [filteredData, setFilteredData] = useState(empData.employees);
 
   const searchHandler = (e) => {
     const inputValue = e.target.value;
     setInput(inputValue);
     filterAndSortData(inputValue, filterOption, sortOption);
-    // const updatedData = filterAndSortData(inputValue, filterOption, sortOption);
-    // setFilteredData(updatedData);
   };
 
   const filterHandler = (event, { value }) => {
     setFilterOption(value);
     filterAndSortData(input, value, sortOption);
-    // const updatedData = filterAndSortData(input, value, sortOption);
-    // setFilteredData(updatedData);
   };
 
   const sortHandler = (event, { value }) => {
     setSortOption(value);
-    filterAndSortData(input, value, sortOption);
-    // const updatedData = filterAndSortData(input, filterOption, value);
-    // setFilteredData(updatedData);
+    filterAndSortData(input, filterOption, value);
   };
 
   const filterAndSortData = (searchInput, filter, sort) => {
-    let filteredData = empData.employees;
+    let filteredData = empData.employees.slice();
 
     if (searchInput) {
       filteredData = filteredData.filter((emp) =>
@@ -58,8 +50,7 @@ const EmployeeFilter = (props) => {
       filteredData.sort((a, b) => new Date(a.doj) - new Date(b.doj));
     }
 
-    props.setFilteredEmp(filteredData)
-    return filteredData;
+    props.setFilteredEmp(filteredData);
   };
 
   return (
@@ -71,15 +62,15 @@ const EmployeeFilter = (props) => {
             basic
             floating
             placeholder="Filter By"
-            options={ filterBy }
-            value={ filterOption }
-            onChange={ filterHandler }
+            options={filterBy}
+            value={filterOption}
+            onChange={filterHandler}
           />
         }
         icon="search"
         iconPosition="left"
-        value={ input }
-        onChange={ (e) => searchHandler(e) }
+        value={input}
+        onChange={(e) => searchHandler(e)}
         placeholder="Search here"
       />
       <div className="dropdown-container">
@@ -88,9 +79,9 @@ const EmployeeFilter = (props) => {
           basic
           floating
           placeholder="Sort By"
-          options={ sortBy }
-          value={ sortOption }
-          onChange={ sortHandler }
+          options={sortBy}
+          value={sortOption}
+          onChange={sortHandler}
         />
       </div>
     </div>
